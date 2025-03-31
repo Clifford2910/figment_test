@@ -14,7 +14,7 @@ RSpec.describe Transaction, type: :model do
       _non_transfer = create(:transaction, action_type: 'stake')
       transfer = create(:transaction, action_type: 'transfer')
 
-      expect(Transaction.transfers).to eq([transfer])
+      expect(Transaction.transfers).to eq([ transfer ])
     end
   end
 end
