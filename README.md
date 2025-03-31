@@ -54,7 +54,7 @@ http://localhost:3000
 - For demonstration, `FetchTransactions.call` is run directly in the `TransactionsController#index`.  
 - Ensures data is always fresh on page load.  
 - Not scalable or recommended for production.  
-- Would normally use a background job or cron process.  
+- Would normally use a background job.  
 
 ### 2. API Parsing
 
@@ -125,6 +125,12 @@ Store and validate the API key more securely using Rails credentials or ENV vali
 
 The API data shape required careful inspection. I debugged by logging sample transactions to reveal the nested `actions` array and adjusted our service accordingly.  
 This insight will be documented in the repo as a helpful note.
+
+---
+
+## Screenshot
+
+![App Screenshot](public/project_screenshot.png)
 
 ---
 
