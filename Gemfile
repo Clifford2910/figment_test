@@ -57,4 +57,5 @@ group :test do
   gem "webmock"
   gem "vcr"
   gem "faker"
+  gem 'shoulda-matchers', '~> 6.0'
 end
