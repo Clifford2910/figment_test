@@ -41,7 +41,7 @@ group :development, :test do
   gem "pry"
 
   # Testing
-  gem "rspec-rails", "~> 6.1"
+  gem "rspec-rails", "~> 7.1"
   gem "factory_bot_rails"
 
   # Environment variables
