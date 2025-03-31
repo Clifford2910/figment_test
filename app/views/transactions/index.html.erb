@@ -1,22 +1,38 @@
-<h1>Recent Transfers</h1>
+<div class="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-semibold text-gray-800 mb-6">Recent Transfers</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Sender</th>
-      <th>Receiver</th>
-      <th>Deposit</th>
-      <th>Block Height</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @transactions.each do |tx| %>
-      <tr>
-        <td><%= tx.sender %></td>
-        <td><%= tx.receiver %></td>
-        <td><%= tx.deposit %></td>
-        <td><%= tx.height %></td>
-      </tr>
+    <% if @transactions.any? %>
+      <div class="space-y-4">
+        <% @transactions.each do |tx| %>
+          <div class="bg-white shadow rounded-2xl p-4 border border-gray-200">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm font-medium text-gray-500">Block Height:</span>
+              <span class="text-sm text-gray-900 font-mono"><%= tx.height %></span>
+            </div>
+            <div class="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <p class="text-gray-500 font-medium">Sender</p>
+                <p class="text-gray-800 font-mono truncate"><%= tx.sender %></p>
+              </div>
+              <div>
+                <p class="text-gray-500 font-medium">Receiver</p>
+                <p class="text-gray-800 font-mono truncate"><%= tx.receiver %></p>
+              </div>
+              <div>
+                <p class="text-gray-500 font-medium">Amount</p>
+                <p class="text-green-600 font-semibold"><%= tx.deposit %></p>
+              </div>
+              <div>
+                <p class="text-gray-500 font-medium">Transaction Hash</p>
+                <p class="text-gray-800 font-mono truncate"><%= tx.transaction_hash %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-gray-600 text-center">No transfer transactions found.</p>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

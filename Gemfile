@@ -12,6 +12,9 @@ gem "propshaft"
 # Web server
 gem "puma", ">= 5.0"
 
+# Tailwind
+gem "tailwindcss-rails"
+
 # JSON APIs
 gem "jbuilder"
 
