@@ -9,22 +9,24 @@ class FetchTransactions
   def self.call
     uri = URI("#{API_URL}?api_key=#{API_KEY}")
     response = Net::HTTP.get_response(uri)
-
     raise "API request failed: #{response.code}" unless response.is_a?(Net::HTTPSuccess)
-
+  
     transactions = JSON.parse(response.body)
-
+    puts JSON.pretty_generate(transactions.first)
+  
     transactions.each do |tx|
-      action = tx["action"]
-      next unless action["type"] == "transfer"
-
+      action = tx["actions"]&.first
+      next unless action && action["type"].to_s.downcase == "transfer"
+  
+      Rails.logger.debug "Processing transaction #{tx['hash']}..."
+  
       Transaction.find_or_initialize_by(transaction_hash: tx["hash"]).update!(
         block_hash: tx["block_hash"],
         height: tx["height"],
-        sender: action["from"],
-        receiver: action["to"],
-        deposit: action["deposit"],
-        action_type: action["type"]
+        sender: tx["sender"],
+        receiver: tx["receiver"],
+        deposit: action["data"]["deposit"],
+        action_type: action["type"].downcase
       )
     end
   end
